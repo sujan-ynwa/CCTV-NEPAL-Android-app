@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.cctvnepal.R;
+import com.example.cctvnepal.URL.BaseUrl;
 import com.example.cctvnepal.model.Product;
 
 import java.util.List;
@@ -41,10 +43,19 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i) {
+
+        //image url
+        String image_url = BaseUrl.IMAGE_BASE_URL+products.get(i).getImagepath();
+
+        // setting up the value for the view
         productViewHolder.tvProductName.setText(products.get(i).getProductName());
         productViewHolder.tvPrice.setText(products.get(i).getProductPrice());
         productViewHolder.tvSpecs.setText(products.get(i).getSpecs());
-        productViewHolder.ivProductImage.setImageResource(R.drawable.movie_app_sign_up_two);
+
+        // setting up the image view
+        Glide.with(context).load(image_url).into(productViewHolder.ivProductImage);
+
+
 
     }
 

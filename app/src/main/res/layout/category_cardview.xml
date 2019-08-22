@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="@dimen/margin_small_vertical"
+    android:layout_width="170dp"
+    android:layout_height="130dp"
+    app:cardCornerRadius="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardviewCategoryMenu"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+    <!-- to make the cardview clickable insert three line above this comment -->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+            <ImageView
+                android:id="@+id/ivIcon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_small_vertical"
+                android:layout_width="120dp"
+                android:layout_height="90dp"
+               />
+            <TextView
+                android:id="@+id/tvCategoryName"
+                android:layout_below="@id/ivIcon"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:text="Cameras"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>

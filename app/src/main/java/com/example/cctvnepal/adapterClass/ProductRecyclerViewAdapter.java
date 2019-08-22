@@ -3,6 +3,7 @@ package com.example.cctvnepal.adapterClass;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
 
         // setting up the value for the view
         productViewHolder.tvProductName.setText(products.get(i).getProductName());
-        productViewHolder.tvPrice.setText(products.get(i).getProductPrice());
+        productViewHolder.tvPrice.setText(String.valueOf(products.get(i).getPrice()));
         productViewHolder.tvSpecs.setText(products.get(i).getSpecs());
 
         // setting up the image view

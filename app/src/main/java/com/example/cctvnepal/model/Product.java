@@ -3,8 +3,9 @@ package com.example.cctvnepal.model;
 public class Product {
 
 
+    // these names should be exactly same as the name on the api
     private String productName;
-    private String productPrice;
+    private double price;
     private String specs;
     private String imagePath;
     private boolean available;
@@ -14,9 +15,9 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productName, String productPrice, String specs, String imagePath, boolean available) {
+    public Product(String productName,String specs, String imagePath,double price, boolean available) {
         this.productName = productName;
-        this.productPrice = productPrice;
+        this.price = price;
         this.specs = specs;
         this.imagePath = imagePath;
         this.available = available;
@@ -30,12 +31,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductPrice() {
-        return productPrice;
+    public double getPrice() {
+        return price;
     }
 
-    public void setProductPrice(String productPrice) {
-        this.productPrice = productPrice;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getSpecs() {

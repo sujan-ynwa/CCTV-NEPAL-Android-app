@@ -43,7 +43,13 @@ public class ProductMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_menu);
 
+        // setting up the category name in produts list
         tvProductTitle = findViewById(R.id.tvProductTitle);
+
+        productsList = new ArrayList<>();
+
+        // calling the asynctask class to do the task in background
+        new LoadFromServer().execute();
 
         // getting the data from another categories Activity
         Intent intent = getIntent();
@@ -61,7 +67,7 @@ public class ProductMenu extends AppCompatActivity {
     public class LoadFromServer extends AsyncTask<Nullable,Nullable,Nullable> {
 
         @Override
-        protected Nullable doInBackground(Nullable... nullables) {
+        protected Nullable doInBackground(Nullable... nullable) {
             loadListApi();
             return null;
         }
@@ -105,8 +111,8 @@ public class ProductMenu extends AppCompatActivity {
                     for(int i=0;i<jsonArray.length();i++) {
                         String json = jsonArray.getString(i);
                         Product product = gson.fromJson(json, Product.class);
+                        Log.d("check", "onResponse: "+json);
                         productsList.add(product);
-
                     }
 
                 } catch (Exception e) {

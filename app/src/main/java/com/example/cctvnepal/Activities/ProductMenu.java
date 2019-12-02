@@ -35,7 +35,7 @@ public class ProductMenu extends AppCompatActivity {
     RecyclerView rvProduct;
     RecyclerView.Adapter productAdapter;
 
-    TextView tvProductTitle;
+
 
 
     @Override
@@ -44,7 +44,7 @@ public class ProductMenu extends AppCompatActivity {
         setContentView(R.layout.activity_product_menu);
 
         // setting up the category name in produts list
-        tvProductTitle = findViewById(R.id.tvProductTitle);
+
 
         productsList = new ArrayList<>();
 
@@ -54,7 +54,11 @@ public class ProductMenu extends AppCompatActivity {
         // getting the data from another categories Activity
         Intent intent = getIntent();
         String title= intent.getStringExtra("Product Category");
-        tvProductTitle.setText(title);
+
+        // setting up the Category titile of the products
+        setTitle(title);
+
+
         rvProduct = findViewById(R.id.rvProductMenu);
 
 
@@ -88,7 +92,6 @@ public class ProductMenu extends AppCompatActivity {
 
     private void loadListApi() {
         final String BASE_URL = BaseUrl.BASE_URL_PRODUCTS;
-        // final String BASE_URL ="http://10.0.2.2:8080/spring-crm-rest/api/customers";
 
         // creating a request ques for HTTP request
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -111,7 +114,6 @@ public class ProductMenu extends AppCompatActivity {
                     for(int i=0;i<jsonArray.length();i++) {
                         String json = jsonArray.getString(i);
                         Product product = gson.fromJson(json, Product.class);
-                        Log.d("check", "onResponse: "+json);
                         productsList.add(product);
                     }
 

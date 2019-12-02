@@ -9,18 +9,38 @@ public class Product {
     private String specs;
     private String imagePath;
     private boolean available;
+    private String companyName;
+    private String warranty;
   //  private Categories categories;
 
 
     public Product() {
     }
 
-    public Product(String productName,String specs, String imagePath,double price, boolean available) {
+    public Product(String productName,String specs, String imagePath,String companyName,String warranty,double price, boolean available) {
         this.productName = productName;
         this.price = price;
+        this.companyName = companyName;
+        this.warranty = warranty;
         this.specs = specs;
         this.imagePath = imagePath;
         this.available = available;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(String warranty) {
+        this.warranty = warranty;
     }
 
     public String getProductName() {

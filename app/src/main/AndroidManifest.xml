@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cctvnepal">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ProductMenu"></activity>
-        <activity android:name=".Activities.CategoriesMenu" />
+        <activity android:name=".Activities.ProductDetails"></activity>
+        <activity android:name=".Activities.ProductMenu" />
+        <activity android:name=".Activities.CategoriesMenu" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Activities.Register" />
         <activity android:name=".Activities.SignIn">
             <intent-filter>
@@ -24,5 +22,8 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

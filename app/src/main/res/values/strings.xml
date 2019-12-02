@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">CCTV Nepal</string>
+    <string name="description">Description</string>
+    <string name="warranty">Warranty</string>
+
+    <!-- Must for the navigation drawer-->
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+
+
 </resources>

@@ -1,6 +1,7 @@
 package com.example.cctvnepal.adapterClass;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.cctvnepal.Activities.ProductDetails;
 import com.example.cctvnepal.R;
 import com.example.cctvnepal.URL.BaseUrl;
 import com.example.cctvnepal.model.Product;
@@ -82,6 +84,28 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
             tvProductName = itemView.findViewById(R.id.tvProductName);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             tvSpecs = itemView.findViewById(R.id.tvSpecs);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos= getAdapterPosition();
+
+                    Product getClickedInfo = products.get(pos);
+
+                    Intent intent = new Intent(v.getContext(), ProductDetails.class);
+                    intent.putExtra("Product name",getClickedInfo.getProductName());
+                    intent.putExtra("details",getClickedInfo.getSpecs());
+                    intent.putExtra("price",getClickedInfo.getPrice());
+                    intent.putExtra("image",getClickedInfo.getImagepath());
+
+                    // added afterwards for test purpose if passes then applly changes
+                    intent.putExtra("companyName",getClickedInfo.getCompanyName());
+                    intent.putExtra("warranty",getClickedInfo.getWarranty());
+
+                    v.getContext().startActivity(intent);
+                }
+            });
 
 
 

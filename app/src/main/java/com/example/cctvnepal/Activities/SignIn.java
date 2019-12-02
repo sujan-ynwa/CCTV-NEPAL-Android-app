@@ -20,7 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cctvnepal.R;
 import com.example.cctvnepal.URL.BaseUrl;
-import com.google.gson.JsonObject;
+import com.example.cctvnepal.fragments.Feedbacks;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -49,6 +49,15 @@ public class SignIn extends AppCompatActivity {
    boolean validationComplete;
 
 
+   // creating a static string variable so that it can be accessed by other class
+   // this is for sending the data to the feedback section
+    // see line no. 136
+   public static String tempEmail="";
+
+   // for finishing this activity on exit
+    public static SignIn signInObj;
+
+
 
 
     @Override
@@ -61,6 +70,12 @@ public class SignIn extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnSignIn);
 
+        signInObj = this;
+
+        // Hide ActionBar
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
 
         // goes to Registration Form
@@ -94,7 +109,9 @@ public class SignIn extends AppCompatActivity {
 
                         // going to the menu after validating the sign in
                         Intent intent  = new Intent(getApplicationContext(), CategoriesMenu.class);
-                        startActivity(intent);
+                       startActivity(intent);
+
+
                         etEmail.setText("");
                         etPassword.setText("");
 
@@ -111,6 +128,8 @@ public class SignIn extends AppCompatActivity {
         for(int i=0;i<emailList.size();i++){
             if(emailList.get(i).equals(email) && passwordList.get(i).equals(password)){
                 validationComplete = true;
+                // storing the user's email id  in static variable so it can be accessed by other class
+                tempEmail = email;
                 break;
             }else{
                 validationComplete = false;

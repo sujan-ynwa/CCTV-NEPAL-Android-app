@@ -8,15 +8,7 @@
     android:orientation="vertical"
     android:background="@color/light_grey">
 
-    <TextView
-        android:id="@+id/tvProductTitle"
-        android:textColor="#ffffff"
-        android:text="Hello"
-        android:gravity="center_horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:textSize="@dimen/title_text_size" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvProductMenu"
         android:layout_marginTop="@dimen/margin_small_vertical"

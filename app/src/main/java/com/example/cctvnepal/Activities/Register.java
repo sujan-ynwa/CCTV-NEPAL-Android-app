@@ -9,29 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkResponse;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cctvnepal.URL.BaseUrl;
 import com.example.cctvnepal.model.Customer;
 import com.example.cctvnepal.R;
-import com.google.gson.JsonObject;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Register extends AppCompatActivity {
 
@@ -40,7 +28,11 @@ public class Register extends AppCompatActivity {
     private EditText etLastName;
     private EditText etEmail;
     private EditText etPassword;
+    private EditText etPhoneNumber;
     private EditText etPasswordConfirm;
+
+    //for showing the toast
+    String toasText="";
 
     // for sending the api back to server
     private Customer customer;
@@ -55,6 +47,7 @@ public class Register extends AppCompatActivity {
         etFirstName = findViewById(R.id.etFirstName);
         etLastName = findViewById(R.id.etLastName);
         etEmail = findViewById(R.id.etEmail);
+        etPhoneNumber = findViewById(R.id.etPhoneNumber);
         etPassword = findViewById(R.id.etPassword);
         etPasswordConfirm = findViewById(R.id.etConfirmPassword);
 
@@ -66,23 +59,24 @@ public class Register extends AppCompatActivity {
                 String firstName = etFirstName.getText().toString();
                 String lastName = etLastName.getText().toString();
                 String email = etEmail.getText().toString();
+                String phoneNumber = etPhoneNumber.getText().toString();
                 String password = etPassword.getText().toString();
                 String passwordConfirm = etPasswordConfirm.getText().toString();
 
                 // validating the data
-                if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Don't leave any field empty", Toast.LENGTH_SHORT).show();
+                if (checkEmptyValue(firstName,lastName,email,password,passwordConfirm,phoneNumber)|| inValidPhone(phoneNumber)) {
+                    Log.e("Checking----- ", "onClick: "+phoneNumber);
+                    Toast.makeText(getApplicationContext(),"Please don't leave any field empty", Toast.LENGTH_SHORT).show();
                 } else {
                     if (validateEmail(email) && password.length()>7 && password.equals(passwordConfirm)) {
                         // saving file to the customer class
-                        customer = new Customer(firstName, lastName, password, email);
+                        customer = new Customer(firstName, lastName, phoneNumber, password, email);
                         // doing the database entry in the server
                         createNewUser();
 
                         // go back to the sign in activity
                         Intent intent = new Intent(getApplicationContext(), SignIn.class);
                         startActivity(intent);
-
                     }else{
                         if(!validateEmail(email)){
                             Toast.makeText(getApplicationContext(), "Please put a valid email", Toast.LENGTH_SHORT).show();
@@ -105,6 +99,41 @@ public class Register extends AppCompatActivity {
 
     }
 
+    private boolean checkEmptyValue(String firstName, String lastName, String email, String password,String passwordConfirm, String phoneNumber){
+
+        if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()||phoneNumber.isEmpty()){
+            toasText ="please don't leave any field empty";
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    private boolean inValidPhone(String phoneNumber) {
+        if(phoneNumber.isEmpty()){
+            toasText = "please don't leave any field empty";
+            return true;
+        }else{
+            if(!phoneNumber.matches("[0-9]+")){
+                toasText="please type correct phone number";
+                return true;
+            }
+            if(phoneNumber.length()>10){
+                toasText ="phone Number too long";
+                return true;
+            }else if(phoneNumber.length()<9){
+                toasText ="phone Number too short";
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+
+
+    }
+
 
     // sends data to the server
     public void createNewUser(){
@@ -117,6 +146,7 @@ public class Register extends AppCompatActivity {
         try {
             postParams.put("firstName", customer.getFirstName());
             postParams.put("lastName",customer.getLastName());
+            postParams.put("contactNumber",customer.getContactNumber());
             postParams.put("email",customer.getEmail());
             postParams.put("password",customer.getPassword());
             Log.e("testing", "createNewUser: "+postParams.toString());
@@ -145,11 +175,7 @@ public class Register extends AppCompatActivity {
 
     }
 
-
-
-
-
-
+    // for email validation
     boolean validateEmail(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }

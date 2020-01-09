@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +89,6 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
                 @Override
                 public void onClick(View v) {
                     int pos= getAdapterPosition();
-
                     Product getClickedInfo = products.get(pos);
 
                     Intent intent = new Intent(v.getContext(), ProductDetails.class);

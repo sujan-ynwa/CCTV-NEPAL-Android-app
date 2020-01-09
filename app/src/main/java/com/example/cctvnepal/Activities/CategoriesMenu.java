@@ -35,7 +35,6 @@ import com.example.cctvnepal.fragments.AddToCart;
 import com.example.cctvnepal.fragments.Feedbacks;
 import com.example.cctvnepal.fragments.PurchaseHistory;
 import com.example.cctvnepal.model.Categories;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -58,6 +57,9 @@ public class CategoriesMenu extends AppCompatActivity implements NavigationView.
 
     private boolean exitApp;
 
+    // for disabling  add to cart
+    public static List<String>  cartItems;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,9 @@ public class CategoriesMenu extends AppCompatActivity implements NavigationView.
 
         // initializing the list
         categoriesList = new ArrayList<>();
+
+        // for disabling  add to cart
+        cartItems = new ArrayList<>();
 
         // calling the asynctask class to do the task in background
        new LoadFromServer().execute();
@@ -254,24 +259,46 @@ public class CategoriesMenu extends AppCompatActivity implements NavigationView.
                 , new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                // creating gson object to convert JSON file
-                Gson gson = new Gson();
 
                 //gets the array response
                 // now parsing the array into the value
-
                     try {
+                        // getting the embedded object
                         JSONObject embedded = response.getJSONObject("_embedded");
+
+                        // getting the categories array inside of the embedded object
                         JSONArray jsonArray = embedded.getJSONArray("categorieses");
+
                         for(int i=0;i<jsonArray.length();i++) {
-                            String json = jsonArray.getString(i);
-                            Categories categories = gson.fromJson(json, Categories.class);
+
+                            // getting all the objects that are inside of the array
+                            JSONObject temp = jsonArray.getJSONObject(i);
+
+                            // getting the links objects that is inside the temp object
+                            JSONObject linksObj = temp.getJSONObject("_links");
+
+                            // getting the product object that is inside of the links
+                            JSONObject productObj = linksObj.getJSONObject("products");
+
+                            // getting the link to the product list base on their categories
+                            String links = productObj.getString("href");
+
+                            // parsing the value of json into the string
+                            String categoryName = temp.getString("categoryName");
+                            String imagePath = temp.getString("imagePath");
+                            String categoryCode = temp.getString("categoryCode");
+
+                            // initiating the categories class so that we can add it to the list
+                            // which will later be used to populate the recycler view
+                            Categories categories = new Categories(categoryName,imagePath,categoryCode,links);
+                            Log.e("The data that", "onResponse: "+categories );
                             categoriesList.add(categories);
 
                         }
 
+
                     } catch (Exception e) {
-                        Log.d(e.getMessage(), "onResponse: ------------JSON Prasing exception-----------");
+                        Log.d("JSON PARSING ERROR", e.getMessage());
                     }
 
 

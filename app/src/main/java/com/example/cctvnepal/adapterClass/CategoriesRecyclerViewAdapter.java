@@ -5,16 +5,13 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.cctvnepal.Activities.CategoriesMenu;
 import com.example.cctvnepal.Activities.ProductMenu;
 import com.example.cctvnepal.R;
 import com.example.cctvnepal.URL.BaseUrl;
@@ -26,7 +23,6 @@ import java.util.List;
 
 
 public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<CategoriesRecyclerViewAdapter.CategoryViewHolder> {
-
 
     private List<Categories> categoriesList;
     private Context context;
@@ -77,9 +73,8 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Categori
         TextView tvCategoryName;
         CardView cardviewCategories;
         public CategoryViewHolder(View itemView, final Context context) {
-            super(itemView);
-
-           this.context = context;
+                    super(itemView);
+                   this.context = context;
 
             ivIcon = itemView.findViewById(R.id.ivIcon);
             tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
@@ -94,10 +89,11 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Categori
 
                     Categories getClickedDataInfo = categoriesList.get(pos);
 
-
                    Intent intent = new Intent(v.getContext(),ProductMenu.class);
                    // sending the data to another activity
-                   intent.putExtra("Product Category",getClickedDataInfo.getcategoryName());
+                   intent.putExtra("Category Name",getClickedDataInfo.getcategoryName());
+                   intent.putExtra("Category code",getClickedDataInfo.getCategoryCode());
+                   intent.putExtra("products Link",getClickedDataInfo.getProducts());
                    v.getContext().startActivity(intent);
                 }
             });

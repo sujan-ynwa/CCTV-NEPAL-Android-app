@@ -4,14 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#eceff1"
     tools:context=".fragments.AddToCart">
+
+    <LinearLayout
+        android:id="@+id/layout_emptyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_empty_list"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="100dp"
+            android:tint="#9E9E9E"
+            android:src="@drawable/ic_speaker_notes_off_black_24dp"/>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvAddToCart"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small_vertical"
-        android:padding="@dimen/margin_small_vertical" />
+        android:layout_height="470dp"
+        android:layout_marginTop="@dimen/margin_small_vertical" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -44,6 +44,17 @@
         android:layout_marginTop="@dimen/margin_small_vertical"
         android:layout_marginLeft="@dimen/margin_small_side"
         android:layout_marginRight="@dimen/margin_small_side"/>
+
+            <EditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/dark_orange"
+                android:hint="Phone number"
+                android:layout_marginTop="@dimen/margin_small_vertical"
+                android:layout_marginLeft="@dimen/margin_small_side"
+                android:layout_marginRight="@dimen/margin_small_side"/>
+
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"

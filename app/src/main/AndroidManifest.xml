@@ -14,10 +14,10 @@
         <activity android:name=".Activities.ProductMenu" />
         <activity android:name=".Activities.CategoriesMenu" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".Activities.Register" />
-        <activity android:name=".Activities.SignIn">
+        <activity android:name=".Activities.SignIn"
+            android:theme="@style/splashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

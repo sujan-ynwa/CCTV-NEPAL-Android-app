@@ -20,7 +20,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cctvnepal.R;
 import com.example.cctvnepal.URL.BaseUrl;
-import com.example.cctvnepal.fragments.Feedbacks;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,6 +43,9 @@ public class SignIn extends AppCompatActivity {
    //to store jason Values
    private List<String> emailList;
    private List<String> passwordList;
+   private List<String> firstnameList;
+   private List<String> lastnameList;
+   private List<String> phoneList;
 
    // to check validation of the Sign in form
    boolean validationComplete;
@@ -53,6 +55,8 @@ public class SignIn extends AppCompatActivity {
    // this is for sending the data to the feedback section
     // see line no. 136
    public static String tempEmail="";
+   public static String tempCustomerName="";
+   public static String tempPhone="";
 
    // for finishing this activity on exit
     public static SignIn signInObj;
@@ -62,6 +66,9 @@ public class SignIn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        setTheme(R.style.AppTheme); //this line is for selectin the theme for splash screen
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
@@ -111,7 +118,6 @@ public class SignIn extends AppCompatActivity {
                         Intent intent  = new Intent(getApplicationContext(), CategoriesMenu.class);
                        startActivity(intent);
 
-
                         etEmail.setText("");
                         etPassword.setText("");
 
@@ -130,6 +136,8 @@ public class SignIn extends AppCompatActivity {
                 validationComplete = true;
                 // storing the user's email id  in static variable so it can be accessed by other class
                 tempEmail = email;
+                tempCustomerName = firstnameList.get(i)+" "+lastnameList.get(i);
+                tempPhone = phoneList.get(i);
                 break;
             }else{
                 validationComplete = false;
@@ -144,6 +152,9 @@ public class SignIn extends AppCompatActivity {
         // initialize lists
         emailList = new ArrayList<>();
         passwordList = new ArrayList<>();
+        firstnameList = new ArrayList<>();
+        lastnameList = new ArrayList<>();
+        phoneList = new ArrayList<>();
 
         final String BASE_URL = BaseUrl.BASE_URL_CUSTOMER;
 
@@ -166,6 +177,9 @@ public class SignIn extends AppCompatActivity {
                         JSONObject customer = jsonArray.getJSONObject(i);
                         emailList.add(customer.getString("email"));
                         passwordList.add(customer.getString("password"));
+                       firstnameList.add(customer.getString("firstName"));
+                       lastnameList.add(customer.getString("lastName"));
+                       phoneList.add(customer.getString("contactNumber"));
                     }
                 } catch (Exception e) {
                        e.printStackTrace();

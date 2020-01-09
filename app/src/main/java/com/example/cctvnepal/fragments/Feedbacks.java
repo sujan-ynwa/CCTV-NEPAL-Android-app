@@ -77,11 +77,12 @@ public class Feedbacks extends Fragment {
                 String title = etFeedbackTitle.getText().toString();
                 String description = etFeedbackDescription.getText().toString();
                 String tempEmail = SignIn.tempEmail;
+                String customerName = SignIn.tempCustomerName;
 
                 if(title.isEmpty() || description.isEmpty()){
                     Toast.makeText(getContext(), "Don't leave any field empty", Toast.LENGTH_SHORT).show();
                 }else{
-                    feedback = new Feedback(tempEmail,title,description);
+                    feedback = new Feedback(tempEmail,customerName,title,description);
                     //sending the data to the server
                     sendFeedbacks();
                     Toast.makeText(getContext(), "Thank you for your feedback!!", Toast.LENGTH_SHORT).show();
@@ -109,6 +110,7 @@ public class Feedbacks extends Fragment {
             postParams.put("customerEmail", feedback.getCustomerEmail());
             postParams.put("title",feedback.getTitle());
             postParams.put("feedback",feedback.getFeedback());
+            postParams.put("customerName",feedback.getcustomerName());
             Log.e("testing", "Sending feedback: "+postParams.toString());
         }catch (Exception e){
             Log.d(e.getMessage(), "Error connecting to the server");

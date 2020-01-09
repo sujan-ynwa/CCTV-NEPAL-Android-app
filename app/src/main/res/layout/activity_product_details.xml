@@ -168,16 +168,19 @@
 
 
            <Button
+               android:id="@+id/btnAddToCart"
                android:layout_marginTop="160dp"
                android:background="#E64A19"
-               android:layout_marginLeft="30dp"
+               android:layout_marginLeft="90dp"
                android:layout_marginBottom="5dp"
-               android:layout_marginRight="30dp"
+               android:layout_marginRight="90dp"
                android:layout_width="match_parent"
                android:layout_height="50dp"
-               android:text="Add To Cart"
+               android:text="@string/add_to_cart"
                android:textSize="25sp"
-               android:textColor="#ffffff"/>
+               android:textColor="#ffffff"
+               android:drawableRight="@drawable/ic_cart_white"
+               />
        </LinearLayout>
    </ScrollView>
 

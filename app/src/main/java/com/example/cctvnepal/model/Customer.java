@@ -5,6 +5,7 @@ public class Customer {
 
     private String firstName;
     private String lastName;
+    private String contactNumber;
     private String password;
     private String email;
 
@@ -12,14 +13,22 @@ public class Customer {
 
 
 
-    public Customer(String firstName, String lastName, String password, String email) {
+    public Customer(String firstName, String lastName,String contactNumber, String password, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.contactNumber = contactNumber;
         this.email = email;
     }
 
 
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
 
     public String getFirstName() {
         return firstName;

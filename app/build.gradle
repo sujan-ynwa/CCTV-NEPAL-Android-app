@@ -38,6 +38,9 @@ dependencies {
     // glide is a library that helps to deal with the images
     implementation 'com.github.bumptech.glide:glide:4.8.0'
 
+    // just trying
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
+
 
     // for REST Api
     implementation 'com.android.volley:volley:1.1.0'

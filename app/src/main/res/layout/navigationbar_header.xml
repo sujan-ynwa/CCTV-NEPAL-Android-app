@@ -8,17 +8,9 @@
     android:padding="@dimen/margin_small_vertical">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"/>
-    <TextView
-        android:id="@+id/customerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/margin_small_vertical"
-        android:textColor="@color/black"
-        android:text="Name of the customers"/>
-
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_cctv_camera" />
     <TextView
         android:id="@+id/customerEmail"
         android:layout_width="wrap_content"

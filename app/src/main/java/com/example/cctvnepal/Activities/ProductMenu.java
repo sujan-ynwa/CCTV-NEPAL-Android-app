@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -18,7 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.cctvnepal.R;
-import com.example.cctvnepal.URL.BaseUrl;
 import com.example.cctvnepal.adapterClass.ProductRecyclerViewAdapter;
 import com.example.cctvnepal.model.Product;
 import com.google.gson.Gson;
@@ -35,6 +34,11 @@ public class ProductMenu extends AppCompatActivity {
     RecyclerView rvProduct;
     RecyclerView.Adapter productAdapter;
 
+    String code;
+
+    // to show the empty list
+    LinearLayout emptyList;
+
 
 
 
@@ -43,7 +47,6 @@ public class ProductMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_menu);
 
-        // setting up the category name in produts list
 
 
         productsList = new ArrayList<>();
@@ -53,18 +56,22 @@ public class ProductMenu extends AppCompatActivity {
 
         // getting the data from another categories Activity
         Intent intent = getIntent();
-        String title= intent.getStringExtra("Product Category");
+        String title= intent.getStringExtra("Category Name");
+        code = intent.getStringExtra("Category code");
+       // productListUrl = intent.getStringExtra("products Link");
+
 
         // setting up the Category titile of the products
         setTitle(title);
 
-
+        // recycler view
         rvProduct = findViewById(R.id.rvProductMenu);
 
-
-
+        // referencing to the empty list layout
+        emptyList =findViewById(R.id.layout_emptyList);
 
     }
+
 
 
     // Asynctask to load the data in the background so that the UI thread won't be interrupted
@@ -80,8 +87,6 @@ public class ProductMenu extends AppCompatActivity {
 
     // loading the data into the recylerView
     public void populateRecylerView(List<Product> products){
-
-
         rvProduct.setLayoutManager(new LinearLayoutManager(this));
         rvProduct.setHasFixedSize(true);
         productAdapter =  new ProductRecyclerViewAdapter(products,this);
@@ -90,10 +95,17 @@ public class ProductMenu extends AppCompatActivity {
     }
 
 
-    private void loadListApi() {
-        final String BASE_URL = BaseUrl.BASE_URL_PRODUCTS;
+    private void showEmptyList(){
+        emptyList.setVisibility(View.VISIBLE);
+    }
 
-        // creating a request ques for HTTP request
+
+    private void loadListApi() {
+        Intent intent = getIntent();
+
+         String BASE_URL =intent.getStringExtra("products Link");;
+
+        // creating a request queue for HTTP request
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
         // Setting HTTP GET request to retrieve the data from the SERVER
@@ -118,12 +130,16 @@ public class ProductMenu extends AppCompatActivity {
                     }
 
                 } catch (Exception e) {
-                    Log.d(e.getMessage(), "onResponse: ------------JSON Prasing exception-----------");
+                    Log.d("Error: ", "onResponse: ------------JSON Prasing exception-----------"+e.getMessage());
                 }
 
 
                 // setting up recycler view after the list is populated
-                populateRecylerView(productsList);
+                if(productsList.isEmpty()){
+                    showEmptyList();
+                }else{
+                    populateRecylerView(productsList);
+                }
             }
 
         } , new Response.ErrorListener() {

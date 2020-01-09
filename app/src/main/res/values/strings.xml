@@ -6,6 +6,7 @@
     <!-- Must for the navigation drawer-->
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="add_to_cart">Add To Cart</string>
 
 
 </resources>
